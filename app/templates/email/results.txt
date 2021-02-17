@@ -1,0 +1,8 @@
+Hello,
+
+here is the link where you can find your results:
+
+{{ result }}
+
+
+Thanks for using this service!
