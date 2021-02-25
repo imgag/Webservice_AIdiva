@@ -1,37 +1,51 @@
 {% extends "base/base.html" %}
 
 {% block content %}
-	<div class="container">
-		<div class="h1">File Upload</div>
-		<form method="post" action="" enctype="multipart/form-data">
-			<div class="form-group">
-				<label class="input-group-file" for="vcfFile">VCF file</label>
-				<input type="file" class="form-data" name="vcfFile" accept=".vcf, .vcf.gz">
-				<p class="help-block">VCF file that should be analyzed.</p>
-			</div>
-			<div class="form-group">
-				<label class="input-group-text" for="hpoFile">HPO file</label>
-				<input type="file" class="form-data" name="hpoFile" accept=".txt">
-				<p class="help-block">TXT file containing all HPO terms (one per line) that are related to the given sample.</p>
-			</div>
-			<div class="form-group">
-				<label class="input-group-text" for="geneExclusion">Gene exclusion file</label>
-				<input type="file" class="form-data" name="geneExclusion" accept=".txt">
-				<p class="help-block">
-					TXT file containing gene symbols (one per line) that should be excluded in the analysis.<br>
-					For example with this file genes that are known to lead to false positives can be excluded.
-				</p>
-			</div>
-			<div class="form-group">
-				<label class="input-group-text" for="familyFile">Family file</label>
-				<input type="file" class="form-data" name="familyFile" accept=".ped">
-				<p class="help-block">PED file that gives the inheritance relations of the samples in the multisample VCF.</p>
-			</div>
-			<div class="form-group">
-				<label for="inputEmail">Email address</label>
-				<input type="email" class="form-data" name="inputEmail" placeholder="Email">
-			</div>
-			<button type="submit" class="btn btn-default">Submit</button>
-		</form>
-	</div>
+        <div class="container">
+                <div class="h1">File Upload</div>
+                <form method="post" action="" enctype="multipart/form-data">
+                        <div class="form-group">
+                                <label class="input-group-file" for="vcfFile">VCF file</label>
+                                <input type="file" class="form-data" name="vcfFile" accept=".vcf, .vcf.gz">
+                                <p class="help-block">VCF file that should be analyzed.</p>
+                        </div>
+                        <div class="form-group">
+                                <label class="input-group-text" for="hpoFile">HPO file</label>
+                                <input type="file" class="form-data" name="hpoFile" accept=".txt">
+                                <p class="help-block">TXT file containing all HPO terms (one per line) that are related to the given sample.</p>
+                        </div>
+                        <div class="form-group">
+                                <label class="input-group-text" for="geneExclusion">Gene exclusion file</label>
+                                <input type="file" class="form-data" name="geneExclusion" accept=".txt">
+                                <p class="help-block">
+                                        TXT file containing gene symbols (one per line) that should be excluded in the analysis.<br>
+                                        For example with this file genes that are known to lead to false positives can be excluded.
+                                </p>
+                        </div>
+                        <div class="form-group">
+                                <label class="input-group-text" for="familyFile">Family file</label>
+                                <input type="file" class="form-data" name="familyFile" accept=".ped">
+                                <p class="help-block">PED file that gives the inheritance relations of the samples in the multisample VCF.</p>
+                        </div>
+                        <div class="form-group">
+                                <label class="input-group-text">Family type</label>
+                                <div class "btn-group" role="group">
+                                        <input type="radio" class="btn-check" name="familyType" id="typeSingle" autocomplete="off" value="SINGLE" checked>
+                                        <label class="btn btn-outline-primary" for="typeSingle">SINGLE</label>
+
+                                        <input type="radio" class="btn-check" name="familyType" id="typeTrio" autocomplete="off" value="TRIO">
+                                        <label class="btn btn-outline-primary" for="typeTrio">TRIO</label>
+                                </div>
+                                <p class="help-block">
+                                        Defines if the given sample is a single sample or a multisample VCF.<br>
+                                        For TRIO it is assumed that three samples are present in the file (father, mother and affected child).
+                                </p>
+                        </div>
+                        <div class="form-group">
+                                <label for="inputEmail">Email address</label>
+                                <input type="email" class="form-data" name="inputEmail" placeholder="Email">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+        </div>
 {% endblock %}

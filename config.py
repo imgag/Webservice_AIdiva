@@ -14,5 +14,7 @@ class Config(object):
     
     # defines the maximum file size (current: 100MB)
     MAX_CONTENT_LENGTH = 100*1024*1024
-    UPLOAD_EXTENSIONS = [".txt", ".vcf", ".vcf.gz"]
-    UPLOAD_PATH = "/var/www/AIdiva-Webservice/workdir/"
+    VCF_EXTENSIONS = [".VCF", ".vcf", ".vcf.gz"]
+    PED_EXTENSIONS = [".ped", ".PED"]
+    TXT_EXTENSIONS = [".txt", "TXT"]
+    UPLOAD_PATH = "/var/www/html/download/ahboced1/aidiva_workdir/"
