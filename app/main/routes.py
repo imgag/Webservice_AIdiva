@@ -54,16 +54,16 @@ def file_upload():
                         hpo_file.save(work_dir +  "/" + hpo_filename)
 
                 if geneExclusion_file.filename != "":
-                        if geneExclusion_file_ext not in app.config["TXT_EXTENSIONS"]:
+                        if geneExclusion_file_ext not in current_app.config["TXT_EXTENSIONS"]:
                                 abort(400)
                         geneExclusion_file.save(work_dir +  "/" + geneExclusion_filename)
 
                 if family_file.filename != "":
-                        if family_file_ext not in app.config["PED_EXTENSIONS"]:
+                        if family_file_ext not in current_app.config["PED_EXTENSIONS"]:
                                 abort(400)
                         family_file.save(work_dir +  "/" + family_filename)
 
-                tasks.create_and_queue_jobs(work_dir +  "/", result_folder, mail_address, vcf_filename, fam_type=family_type)
+                tasks.create_and_queue_jobs(work_dir +  "/", result_folder, mail_address, vcf_filename, hpo_file=hpo_filename, exclusion_file=geneExclusion_filename, fam_file=family_filename, fam_type=family_type)
 
         return render_template("file_handling/file_upload.html", title="File Upload")
 

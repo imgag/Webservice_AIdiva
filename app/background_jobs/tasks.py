@@ -31,7 +31,7 @@ def create_and_queue_jobs(work_dir, result_folder, mail_address,vcf_file, hpo_fi
 def run_aidiva(work_dir, result_folder, mail_address, vcf_file, hpo_file, fam_file, exclusion_file, fam_type):
         try:
                 aidiva_command = "/var/www/html/AIdiva/venv/bin/python3 /var/www/html/AIdiva/tools/AIdiva-0.5/aidiva/run_annotation_and_AIdiva.py"
-                aidiva_command = aidiva_command + " --config /var/www/html/AIdiva/tools/AIdiva-0.5/data/AIdiva_configuration_with_annotation.yml"
+                aidiva_command = aidiva_command + " --config /var/www/html/AIdiva/tools/AIdiva-0.5/data/AIdiva_configuration_with_annotation.yaml"
                 aidiva_command = aidiva_command + " --vcf " + work_dir + vcf_file
                 aidiva_command = aidiva_command + " --workdir " + work_dir
 
