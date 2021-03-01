@@ -30,8 +30,8 @@ def create_and_queue_jobs(work_dir, result_folder, mail_address,vcf_file, hpo_fi
 
 def run_aidiva(work_dir, result_folder, mail_address, vcf_file, hpo_file, fam_file, exclusion_file, fam_type):
         try:
-                aidiva_command = "/var/www/html/AIdiva/venv/bin/python3 /var/www/html/AIdiva/tools/AIdiva-0.5/aidiva/run_annotation_and_AIdiva.py"
-                aidiva_command = aidiva_command + " --config /var/www/html/AIdiva/tools/AIdiva-0.5/data/AIdiva_configuration_with_annotation.yaml"
+                aidiva_command = "/var/www/html/AIdiva/venv/bin/python3 /var/www/html/AIdiva/tools/AIdiva-0.6/aidiva/run_annotation_and_AIdiva.py"
+                aidiva_command = aidiva_command + " --config /var/www/html/AIdiva/AIdiva_configuration_with_annotation.yaml"
                 aidiva_command = aidiva_command + " --vcf " + work_dir + vcf_file
                 aidiva_command = aidiva_command + " --workdir " + work_dir
 
@@ -52,6 +52,7 @@ def run_aidiva(work_dir, result_folder, mail_address, vcf_file, hpo_file, fam_fi
                 
                 # start AIdiva pipeline to process the uploaded files
                 subprocess.run(aidiva_command, shell=True, check=True)
+                subprocess.run("zip -rm /var/www/html/download/ahboced1/aidiva_workdir/" + result_folder + ".zip " + work_dir, shell=True, check=True)
                 send_result_mail(mail_address, result_folder)
         except:
                 app.logger.error("Unhandled exception", exc_info=sys.exc_info())
@@ -59,11 +60,11 @@ def run_aidiva(work_dir, result_folder, mail_address, vcf_file, hpo_file, fam_fi
                 print("Job successfully finished!")
 
 
-def send_result_mail(mail_address, work_dir):
+def send_result_mail(mail_address, result_folder):
         try:
                 #send mail with link to the workfolder
-                email_text = render_template("email/results.txt", result=str("https://download.imgag.de/ahboced1/aidiva_workdir/" + work_dir))
-                email_html = render_template("email/results.html", result=str("https://download.imgag.de/ahboced1/aidiva_workdir/" + work_dir))
+                email_text = render_template("email/results.txt", result=str("https://download.imgag.de/ahboced1/aidiva_workdir/" + result_folder + ".zip"))
+                email_html = render_template("email/results.html", result=str("https://download.imgag.de/ahboced1/aidiva_workdir/" + result_folder + ".zip"))
                 mail_handler.send_mail("AIdiva-result", ("AIdiva Team", "no-reply@imgag.de"), [mail_address], email_text, email_html, None)
         except:
                 app.logger.error("Unhandled exception", exc_info=sys.exc_info())
